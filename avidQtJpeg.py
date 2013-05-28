@@ -20,15 +20,16 @@ jpegPath = ("//Volumes//IO01//HyMovieCreator//Quicktime//RAR")
 # Path des qts voulu en Avid
 originalPath = sys.argv[1]
 def renameFile():
-for files in os.listdir(originalPath):
-    filename = files.split(".")[0]
-    ext = files.split(".")[-1]
-    qtAvid = (filename + "_AVID")
-    qtJpeg = (filename + ".zip")
-    if ext.lower() != "mov":
-        continue
-    filenameAvid = qtAvid + "." + ext
-    print files
+    for files in os.listdir(originalPath):
+        filename = files.split(".")[0]
+        ext = files.split(".")[-1]
+        qtAvid = (filename + "_AVID")
+        qtJpeg = (filename + ".zip")
+        if ext.lower() != "mov":
+            continue
+        filenameAvid = qtAvid + "." + ext
+        print files
+        print("allo")
 
 # la partie qui va trouver le Qt AVid et le copy au path voulu
     for newFile in os.listdir(avidPath):
