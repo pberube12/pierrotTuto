@@ -12,9 +12,12 @@ import os
 import shutil
 import sys
 
-# Path dans lequel se trouvent les AVID
+# Path dans lequel se trouvent les AVID et Zip
 avidPath = ("//Volumes//IO01//HyMovieCreator//Quicktime//HD")
 jpegPath = ("//Volumes//IO01//HyMovieCreator//Quicktime//RAR")
+# tous les listing directory que j'ai besoin
+listAvidPath = os.listdir(avidPath)
+listJpegPath = os.listdir(jpegPath)
 
 # fonction pour changer le nom du quicktime en lui rajoutant _AVID
 # Path des qts voulu en Avid
@@ -30,7 +33,7 @@ for files in os.listdir(originalPath):
     print files
 
 # la partie qui va trouver le Qt AVid et le copy au path voulu
-    for newFile in os.listdir(avidPath):
+    for newFile in listAvidPath:
         fullPath = os.path.join(avidPath, newFile)
         destPathMxf = os.path.join(sys.argv[2], "MXF")
         if not os.path.exists(destPathMxf):
@@ -45,7 +48,7 @@ for files in os.listdir(originalPath):
         else:
             continue
         
-    for newZip in os.listdir(jpegPath):
+    for newZip in listJpegPath:
         fullPathZip = os.path.join(jpegPath, newZip)
         destPathZip = os.path.join(sys.argv[2], "JPEG")
         if not os.path.exists(destPathZip):
