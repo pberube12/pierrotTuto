@@ -30,7 +30,7 @@ def renameAvid(originalPath):
         if ext.lower() != "mov":
             continue
         qtAvid = filenameAvid + "." + ext
-        return qtAvid
+    return qtAvid
 
 # fonction pour changer le nom des quicktime en remplacant le mov en zip
 def renameZip(originalPath):
@@ -41,7 +41,7 @@ def renameZip(originalPath):
         ext = files.split(".")[-1]
         if ext.lower() != "mov":
             continue
-        return qtJpeg
+    return qtJpeg
 
 # fonction pour la creation de folder
 def creationFolder(folder):
@@ -53,12 +53,13 @@ def creationFolder(folder):
 # la partie qui va trouver le Qt Avid et le copy au path voulu
 for newFile in listAvidPath:
     newFolder = creationFolder("MXF")
+    qtAvidRename = renameAvid(sys.argv[1])
     fullPath = os.path.join(avidPath, newFile)
     if os.path.isdir(fullPath):
         continue
-    if renameAvid(sys.argv[1]) == newFile.lower():
-        print("")
+    if qtAvidRename.lower() == newFile.lower():
         print("Searching Qt Avid")
+        print qtAvidRename
         shutil.copy2(fullPath, newFolder)
         print("Done")
     else:
@@ -67,12 +68,13 @@ for newFile in listAvidPath:
 # la partie qui va trouver les zip et le copy au path voulu
 for newZip in listJpegPath:
     newFolder = creationFolder("JPEG")
+    qtJpegRename = renameZip(sys.argv[1])
     fullPathZip = os.path.join(jpegPath, newZip)
     if os.path.isdir(fullPathZip):
         continue
-    if renameZip(sys.argv[1]) == newZip.lower():
-        print("")
+    if qtJpegRename.lower() == newZip.lower():
         print("Searching Zip")
+        print qtJpegRename
         shutil.copy2(fullPathZip, newFolder)
         print("Done")
     else:
