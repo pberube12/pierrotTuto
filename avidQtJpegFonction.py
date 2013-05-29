@@ -18,8 +18,7 @@ jpegPath = ("//Volumes//IO01//HyMovieCreator//Quicktime//RAR")
 # tous les listing directory que j'ai besoin
 listAvidPath = os.listdir(avidPath)
 listJpegPath = os.listdir(jpegPath)
-qtJpegRename = renameZip(sys.argv[1]) # Ma liste de zip renommé
-qtAvidRename = renameAvid(sys.argv[1]) # Ma liste de qt renommé
+
 
 def renameAvid(originalPath):
     """
@@ -74,6 +73,7 @@ def creationFolder(folder):
     return destPath
 
 # Parti qui copie le _AVID dans le folder voulu
+qtAvidRename = renameAvid(sys.argv[1]) # Ma liste de qt renommé
 for newFile in qtAvidRename:
     newFolder = creationFolder("MXF") # Le folder mxf est maintenant créé
     fullPath = os.path.join(avidPath, newFile) # le path des qt avid qu'on va vouloir
@@ -86,6 +86,7 @@ for newFile in qtAvidRename:
         print("Done")
  
 # la partie qui va trouver les zip et le copy au path voulu
+qtJpegRename = renameZip(sys.argv[1]) # Ma liste de zip renommé
 for newZip in qtJpegRename:
     newFolder = creationFolder("JPEG") # Le folder JPEG est maintenant créé
     fullPathZip = os.path.join(jpegPath, newZip) # le path des zip qu'on va vouloir
