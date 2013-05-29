@@ -20,9 +20,14 @@ listAvidPath = os.listdir(avidPath)
 listJpegPath = os.listdir(jpegPath)
 
 
-# fonction pour changer le nom du quicktime en lui rajoutant _AVID
 def renameAvid(originalPath):
     """
+    Ceci est la fonction qui renomme le quicktime original en rajoutant _AVID
+        listOriginalPath : c'est la liste(path) des quicktimes qu'on veut modifier
+        listeQtRecherche : La liste qu'on veut renvoyer des qt renommé
+        filename : filename sans l'extension
+        ext : l'extension split 
+        qtAvid : le nouveau que l'on veut avec _AVID 
     """
     listOriginalPath = os.listdir(originalPath)
     listeQtRecherche = []
@@ -36,7 +41,6 @@ def renameAvid(originalPath):
         listeQtRecherche.append(qtAvid)
     return listeQtRecherche
 
-# fonction pour changer le nom des quicktime en remplacant le mov en zip
 def renameZip(originalPath):
     """
     Ceci est la fonction qui renomme le quicktime original en ramplacant le .mov par .zip
@@ -58,8 +62,11 @@ def renameZip(originalPath):
         listeZipRecherche.append(qtJpeg)
     return listeZipRecherche
 
-# fonction pour la creation de folder
 def creationFolder(folder):
+    """
+    Ceci est une fonction qui fait un nouveau folder au path demandé
+        destPath : l'argument passé est le path ou l'on veut créer le nouveau folder
+    """
     destPath = os.path.join(sys.argv[2], folder)
     if not os.path.exists(destPath):
         os.makedirs(destPath)
