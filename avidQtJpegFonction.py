@@ -72,21 +72,20 @@ def creationFolder(folder):
         os.makedirs(destPath)
     return destPath
 
-# la partie qui va trouver le Qt Avid et le copy au path voulu
-for newFile in listAvidPath:
-    newFolder = creationFolder("MXF")
-    qtAvidRename = renameAvid(sys.argv[1])
-    fullPath = os.path.join(avidPath, newFile)
+# Parti qui copie le _AVID dans le folder voulu
+qtAvidRename = renameAvid(sys.argv[1])
+for newFile in qtAvidRename:
+    newFolder = creationFolder("MXF") # Le folder mxf est maintenant créé
+    fullPath = os.path.join(avidPath, newFile) # le path des qt avid
     if os.path.isdir(fullPath):
         continue
-    if qtAvidRename[].lower() == newFile.lower():
+    if os.path.exists(fullPath):
         print("Searching Qt Avid")
-        print qtAvidRename[]
+        print(newFile)
         shutil.copy2(fullPath, newFolder)
         print("Done")
-    else:
-        continue
-    
+
+"""   
 # la partie qui va trouver les zip et le copy au path voulu
 for newZip in listJpegPath:
     newFolder = creationFolder("JPEG")
@@ -101,3 +100,4 @@ for newZip in listJpegPath:
         print("Done")
     else:
         continue
+"""
