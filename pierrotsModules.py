@@ -60,3 +60,20 @@ def creationFolder(folder):
     if not os.path.exists(destPath):
         os.makedirs(destPath)
     return destPath
+
+def renameFrums(originalPath):
+    """
+    Ceci est une fonction qui renomme les quicktime dans le bon format
+    """
+    path = os.listdir(originalPath)
+    for qt in path:
+        qtPath = os.path.join(originalPath, qt)
+        if os.path.isdir(qtPath):
+            continue
+        shot = qt.split("_")[0][0:3]
+        scene = qt.split("_")[1]
+        version = qt.split("_")[-1][3:-4]
+        ext = qt.split(".")[-1]
+        newShot = ("SF" + shot + "_" + scene)
+        newScene = ("SF" + shot)
+        return(newShot, newScene)
