@@ -11,8 +11,9 @@
 import os
 import sys
 import shutil
+import pierrotsModules
 
-def renameDnx(originalPath):
+def copieDnx(originalPath):
     """
     Ceci est la fonction qui renomme le quicktime original en enlevant _vfx 
         listOriginalPath : c'est la liste(path) des quicktimes qu'on veut modifier
@@ -22,6 +23,8 @@ def renameDnx(originalPath):
         vfx : le _vfx seul
         qtDnx : le nouveau que l'on veut sans _vfx 
     """
+    pathDnx = ("//Volumes//IO01//HyMovieCreator//Quicktime//HD")
+    pathDnxCentQuinze = ("//Volumes//IO01//HyMovieCreator//Quicktime//HD115")
     listOriginalPath = os.listdir(originalPath)
     listeDnxRecherche = []
     for files in listOriginalPath:
@@ -30,5 +33,10 @@ def renameDnx(originalPath):
         if ext.lower() != "mov":
             continue
         qtDnx = filename + "." + ext
-        listeDnxRecherche.append(qtDnx)
-    return listeDnxRecherche
+        fullPath = os.path.join(pathDnx, qtDnx)
+        if os.path.exists(fullPath):
+            print("Searching Qt DNX")
+            print(qtDnx)
+            shutil.copy2(fullPath, newFolder) #LA copie
+            print("Done")
+    return
