@@ -67,6 +67,8 @@ def renameFrums(originalPath):
     """
     path = os.listdir(originalPath)
     for qt in path:
+        listShot = []
+        listScene = []
         qtPath = os.path.join(originalPath, qt)
         if os.path.isdir(qtPath):
             continue
@@ -76,4 +78,7 @@ def renameFrums(originalPath):
         ext = qt.split(".")[-1]
         newShot = ("SF" + shot + "_" + scene)
         newScene = ("SF" + shot)
-        return(newShot, newScene)
+        listShot.append(newShot)
+        listScene.append(newScene)
+        return(listShot, listScene)
+    print(listShot, listScene)
