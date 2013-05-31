@@ -29,4 +29,8 @@ if __name__ == '__main__':
         qtRenameScene = qtRename[newQt]
         pathBn = ("//Volumes//QUICKTIME//Smurf//Sort_By_Name//{scene}//{shot}").format(scene = qtRenameScene, shot = newQt)
         listPathBn = os.listdir(pathBn)
-        qtDict[newQt] = listPathBn
+        for bleu in listPathBn:
+            pathSize = os.path.join(pathBn, bleu)
+        dataDict = pierrotsModules.partFrums(listPathBn, pathSize)
+        qtDict[newQt] = dataDict
+    print(qtDict)
