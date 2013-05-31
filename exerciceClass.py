@@ -26,14 +26,10 @@ if __name__ == '__main__':
     qtDict = {}
     qtRename = pierrotsModules.renameFrums(path)
     qtRenameShot = qtRename.keys()
-    qtRenameScene = qtRename.values()
-    for newQt in listPath:
-        newQtSplit = newQt.split(".")[-1]
-        if newQtSplit != "mov":
-            continue
-        print newQt
-"""
-        pathBn = os.path.join(pathBn, newQt)
-        listPathBn = os.listdir(pathBn)
-        qtDict[newQt] = listPathBn
-"""
+    for newQt in qtRenameShot:
+        qtRenameScene = qtRename[newQt]
+        pathBn = os.path.join(pathBn, qtRenameScene, newQt)
+        print pathBn
+        #listPathBn = os.listdir(pathBn)
+        #qtDict[newQt] = listPathBn
+        #print(qtDict.keys())
