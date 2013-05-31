@@ -19,24 +19,26 @@ boucle à travers un folder et va print dans un dictionnaire la shot en key et le
     
     """
 if __name__ == '__main__':
+"""
     qtDict = {} 
     originalPath = ("//Users//assistant//Desktop//Not_Delete")
     path = os.listdir(originalPath)
 # ici nous allons changer le nom des qt
     for qt in path:
-        listShot = []
-        listScene = []
+        dictByName = {}
         qtPath = os.path.join(originalPath, qt)
         if os.path.isdir(qtPath):
             continue
-        shot = qt.split("_")[0][0:3]
-        scene = qt.split("_")[1]
-        version = qt.split("_")[-1][3:-4]
-        ext = qt.split(".")[-1]
+        qtSplitter = qt.split("_")
+        erreur = len(qtSplitter)
+        if erreur != 3:
+            continue 
+        shot = qtSplitter[0][0:3]
+        scene = qtSplitter[1]
         newShot = ("SF" + shot + "_" + scene)
         newScene = ("SF" + shot)
-        listShot.append(newShot) # liste des shot ex. SF003_003
-        listScene.append(newScene) # liste des scene ex. SF003
+        dictByName[newScene] = newShot
+    """
 # ici c'est la partie qui va chercher dans ByName les bon qt
         pathBn = ("//Volumes//QUICKTIME//Smurf//Sort_By_Name")
         for newQt in listScene:
@@ -45,4 +47,3 @@ if __name__ == '__main__':
                 pathBn = os.path.join(pathBn, newQtDeux)
                 listPathBn = os.listdir(pathBn)
                 qtDict[newShot] = listPathBn
-                print(qtDict)
