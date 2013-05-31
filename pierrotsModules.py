@@ -63,22 +63,24 @@ def creationFolder(folder):
 
 def renameFrums(originalPath):
     """
-    Ceci est une fonction qui renomme les quicktime dans le bon format
+    Ceci est une fonction qui renomme les quicktime dans le bon format et retourne un dictionnaire Scene:shot
+        path = le path dess qt qu'on veut renommer
+        dictByName = dictionnaire des Scene = key et des Shot = Value
+        qtSplitter = tous les quicktimes splitter en trois partie
     """
     path = os.listdir(originalPath)
     for qt in path:
-        listShot = []
-        listScene = []
+        dictByName = {}
         qtPath = os.path.join(originalPath, qt)
-        if os.path.isdir(qtPath):
+        if os.path.isdir(qtPath): # ignorer les folder
             continue
-        shot = qt.split("_")[0][0:3]
-        scene = qt.split("_")[1]
-        version = qt.split("_")[-1][3:-4]
-        ext = qt.split(".")[-1]
+        qtSplitter = qt.split("_")
+        erreur = len(qtSplitter)
+        if erreur != 3: # ignorer les qt qui n'ont pas la nomenclature du projet
+            continue 
+        shot = qtSplitter[0][0:3]
+        scene = qtSplitter[1]
         newShot = ("SF" + shot + "_" + scene)
         newScene = ("SF" + shot)
-        listShot.append(newShot)
-        listScene.append(newScene)
-        return(listShot, listScene)
-    print(listShot, listScene)
+        dictByName[newScene] = newShot
+        return dictByName
