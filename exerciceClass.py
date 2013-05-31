@@ -20,16 +20,15 @@ script qui print dans un dictionnaire la shot en key et les qt correspondant dan
     listPathBn : la liste de toutes les shots dans le folder Sort_By_Name
     """
 if __name__ == '__main__':
-    pathBn = ("//Volumes//QUICKTIME//Smurf//Sort_By_Name")
-    path = ("//Volumes//QUICKTIME//Smurf//Visionnement//2D")
+    path = ("//Users//assistant//Desktop//Not_Delete")
     listPath = os.listdir(path)
     qtDict = {}
     qtRename = pierrotsModules.renameFrums(path)
     qtRenameShot = qtRename.keys()
     for newQt in qtRenameShot:
+        pathBn = ("//Volumes//QUICKTIME//Smurf//Sort_By_Name")
         qtRenameScene = qtRename[newQt]
         pathBn = os.path.join(pathBn, qtRenameScene, newQt)
-        print pathBn
-        #listPathBn = os.listdir(pathBn)
-        #qtDict[newQt] = listPathBn
-        #print(qtDict.keys())
+        listPathBn = os.listdir(pathBn)
+        qtDict[newQt] = listPathBn
+    print(qtDict)
