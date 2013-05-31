@@ -96,6 +96,10 @@ def partFrums(listQt, path):
         exeption = on isole le h
     """
     newDict = {}
+    extList =[]
+    versionList = []
+    poidsList = []
+    qtList = []
     for qt in listQt:
         qtSplitterPoint = qt.split(".")
         qtSplitterUnder = qt.split("_")
@@ -105,8 +109,12 @@ def partFrums(listQt, path):
         exeption = qtSplitterUnder[-1][0].lower()
         if exeption != "h": #on ne veut pas les bg
             continue
-        newDict['Name:'] = qt
-        newDict['Extension:'] = ext
-        newDict['Version:'] = version
-        newDict['Size'] = poids
+        qtList.append(qt)
+        extList.append(ext)
+        versionList.append(version)
+        poidsList.append(poids)
+        newDict['Name:'] = qtList
+        newDict['Extension:'] = extList
+        newDict['Version:'] = versionList
+        newDict['Size'] = poidsList
     return newDict
