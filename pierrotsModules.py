@@ -65,7 +65,7 @@ def renameFrums(originalPath):
     """
     Ceci est une fonction qui renomme les quicktime dans le bon format et retourne un dictionnaire Scene:shot
         path = le path dess qt qu'on veut renommer
-        dictByName = dictionnaire des Scene = key et des Shot = Value
+        dictByName = dictionnaire des Shot = key et des Scene = Value
         qtSplitter = tous les quicktimes splitter en trois partie
     """
     path = os.listdir(originalPath)
