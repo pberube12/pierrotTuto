@@ -84,3 +84,29 @@ def renameFrums(originalPath):
         newScene = ("SF" + shot)
         dictByName[newShot] = newScene
     return dictByName
+
+def partFrums(listQt, path):
+    """
+    Fonction qui me crée un Dicitonnaire avec plusieur info pour un qt
+        newDict : le dictionnaire voulu
+        qtSplitterPoint : quicktime splitter par les points
+        qtSplitterUnder : quicktime splitter par les underscore
+        ext = extention de la shot
+        version = version de la shot sans le h
+        exeption = on isole le h
+    """
+    newDict = {}
+    for qt in listQt:
+        qtSplitterPoint = qt.split(".")
+        qtSplitterUnder = qt.split("_")
+        ext = qtSplitterPoint[-1]
+        poids = os.path.getsize(path)
+        version = qtSplitterUnder[-1][3:-4]
+        exeption = qtSplitterUnder[-1][0].lower()
+        if exeption != "h": #on ne veut pas les bg
+            continue
+        newDict['Name:'] = qt
+        newDict['Extension:'] = ext
+        newDict['Version:'] = version
+        newDict['Size'] = poids
+    return newDict
