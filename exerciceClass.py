@@ -33,4 +33,4 @@ if __name__ == '__main__':
             pathSize = os.path.join(pathBn, bleu)
         dataDict = pierrotsModules.partFrums(listPathBn, pathSize)
         qtDict[newQt] = dataDict
-    print(qtDict['SF057_340'])
+    print(qtDict)

@@ -95,11 +95,9 @@ def partFrums(listQt, path):
         version = version de la shot sans le h
         exeption = on isole le h
     """
-    newDict = {}
-    extList =[]
-    versionList = []
-    poidsList = []
-    qtList = []
+    data = {}
+    list = []
+    poids = 0
     for qt in listQt:
         qtSplitterPoint = qt.split(".")
         qtSplitterUnder = qt.split("_")
@@ -109,12 +107,9 @@ def partFrums(listQt, path):
         exeption = qtSplitterUnder[-1][0].lower()
         if exeption != "h": #on ne veut pas les bg
             continue
-        qtList.append(qt)
-        extList.append(ext)
-        versionList.append(version)
-        poidsList.append(poids)
-        newDict['Name:'] = qtList
-        newDict['Extension:'] = extList
-        newDict['Version:'] = versionList
-        newDict['Size'] = poidsList
-    return newDict
+        data['Name:'] = qt
+        data['Extension:'] = ext
+        data['Version:'] = version
+        data['Size'] = poids
+        list.append(data.copy())
+    return list
