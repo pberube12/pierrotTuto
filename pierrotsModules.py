@@ -69,8 +69,8 @@ def renameFrums(originalPath):
         qtSplitter = tous les quicktimes splitter en trois partie
     """
     path = os.listdir(originalPath)
+    dictByName = {}
     for qt in path:
-        dictByName = {}
         qtPath = os.path.join(originalPath, qt)
         if os.path.isdir(qtPath): # ignorer les folder
             continue
@@ -82,5 +82,5 @@ def renameFrums(originalPath):
         scene = qtSplitter[1]
         newShot = ("SF" + shot + "_" + scene)
         newScene = ("SF" + shot)
-        dictByName[newScene] = newShot
-        return dictByName
+        dictByName[newShot] = newScene
+    return dictByName
