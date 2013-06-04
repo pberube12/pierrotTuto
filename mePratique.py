@@ -18,14 +18,11 @@ imageDict = {}
 for path, dir, files in pathOriginal:
     fichierDict = {}
     for file in files:
-        fileSplit = file.split(".") #fichier séparé par les points
+        fileSplit = file.split(".") #fichier sï¿½parï¿½ par les points
         ext = fileSplit[-1]
         filename = fileSplit[0]
-        if len(fileSplit) == 3: #pour trouver si c'est une image séquence on rechercher les split de trois partie
-            if filename in file: #On veut seulement se qui est dans l'image séquence pas le reste
-                imageDict.setdefault(filename, []).append(file) #On se crée un dict comprenent le nom de la sequence et tous les frames correspondant
+        if len(fileSplit) == 3: #pour trouver si c'est une image sï¿½quence on rechercher les split de trois partie
+            if filename in file: #On veut seulement se qui est dans l'image sï¿½quence pas le reste
+                imageDict.setdefault(filename, []).append(file) #On se crï¿½e un dict comprenent le nom de la sequence et tous les frames correspondant
                 for key in imageDict:
-                    fichierDict["extension"] = ext
-                    fichierDict["path"] = path
-                    fichierDict["name"] = filename
-                print imageDict
+                    print imageDict
