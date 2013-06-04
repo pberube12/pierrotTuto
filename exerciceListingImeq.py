@@ -55,9 +55,8 @@ def listingFolder(size = False, nbMax = False, extension = False):
                     imageDict.setdefault(filename, []).append(file) #On se crée un dict comprenent le nom de la sequence et tous les frames correspondant
                     fichierDict["extension"] = ext
                     fichierDict["path"] = path
-                    for key in imageDict: # pour avoir juste le premier frame comme filename
-                        fichierDict["name"] = key
-                fichierDict["Duration"] = len(imageDict[filename]) #La durée de la séquence d'image
+                    fichierDict["name"] = filename
+                    fichierDict["Duration"] = len(imageDict[filename]) #La durée de la séquence d'image
             else:
                 fichierDict["name"] = filename
                 fichierDict["extension"] = ext

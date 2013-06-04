@@ -28,5 +28,4 @@ for path, dir, files in pathOriginal:
                     fichierDict["extension"] = ext
                     fichierDict["path"] = path
                     fichierDict["name"] = filename
-                print key
-            continue
+                print imageDict
