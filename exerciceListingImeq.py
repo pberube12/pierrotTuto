@@ -51,13 +51,13 @@ def listingFolder(size = False, nbMax = False, extension = False):
                     fichierDict["path"] = path
                 continue
             if len(fileSplit) == 3: #pour trouver si c'est une image séquence on rechercher les split de trois partie
-                if filename in file:
-                    imageDict.setdefault(filename, []).append(file)
+                if filename in file: #On veut seulement se qui est dans l'image séquence pas le reste
+                    imageDict.setdefault(filename, []).append(file) #On se crée un dict comprenent le nom de la sequence et tous les frames correspondant
                     fichierDict["extension"] = ext
                     fichierDict["path"] = path
                     for key in imageDict: # pour avoir juste le premier frame comme filename
                         fichierDict["name"] = key
-                fichierDict["Duration"] = len(imageDict[filename])
+                fichierDict["Duration"] = len(imageDict[filename]) #La durée de la séquence d'image
             else:
                 fichierDict["name"] = filename
                 fichierDict["extension"] = ext
