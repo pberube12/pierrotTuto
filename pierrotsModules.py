@@ -102,7 +102,8 @@ def partFrums(listQt, path):
         qtSplitterPoint = qt.split(".")
         qtSplitterUnder = qt.split("_")
         ext = qtSplitterPoint[-1]
-        poids = os.path.getsize(path)
+        realPoids = os.walk(path)
+        poids = os.path.getsize(realPoids)
         version = qtSplitterUnder[-1][3:-4]
         exeption = qtSplitterUnder[-1][0].lower()
         if exeption != "h": #on ne veut pas les bg
