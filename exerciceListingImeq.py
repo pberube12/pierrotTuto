@@ -27,42 +27,76 @@ def listingFolder(size = False, nbMax = False, extension = False):
         filename = nom du fichier
         filanameDir = Nom du fichier avec son path
     """
-    listeFichierDict = []
-    imageDict = {}
     dirSize = 0
     pathOriginal = os.walk("/Users/assistant/Desktop/Not_Delete")
-    a = 0
+    myDict = {}
     for path, dir, files in pathOriginal:
-        for file in files:
-            fichierDict = {}
-            fileSplit = file.split(".") #fichier séparé par les points
-            ext = fileSplit[-1]
-            filename = fileSplit[0]
-            if file.startswith("."): #enlever le .ds_store
-                continue
-            if size: #premier argument optionnel si il y a une valeur d'entré nous allons avoir le poids dans le dict, sinon rien
-                filenameDir = os.path.join(path, file)
-                dirSize = os.path.getsize(filenameDir)
-                fichierDict["Size"] = dirSize
-            if extension: #Si un argument est ecrit, le script va seulement lister les fichier avec les extension indiqué
-                if extension == ext:
-                    fichierDict["name"] = filename
+        #pour avoir une recursion differente dans mes qts
+        if nbMax:
+            pathSplit = path.split("/")[4:]
+            if len(pathSplit) <= nbMax:
+                newListe = os.listdir(path)
+                for fileNewListe in newListe:
+                    fileNewListePath = os.path.join(path, fileNewListe)
+                    if os.path.isdir(fileNewListePath):
+                        continue
+                    fichierDict = {}
+                    #enlever le .ds_store
+                    if fileNewListe.startswith("."):
+                        continue
+                    #fichier séparé par les points
+                    fileSplit = fileNewListe.split(".")
+                    ext = fileSplit[-1]
+                    filename = fileSplit[0]
+                    filenameExt = filename+ext
+                    #Si un argument est ecrit, le script va seulement lister les fichier avec les extension indiqué
+                    if extension:
+                        if extension != ext:
+                            continue
+                    if not filenameExt in myDict:
+                        fichierDict["name"] = filenameExt
+                        fichierDict["extension"] = ext
+                        fichierDict["path"] = path
+                        fichierDict["Duration"] = 1
+                        myDict[filenameExt] = fichierDict
+                    elif (ext == myDict[filenameExt]["extension"]) and len(fileSplit) == 3:
+                        myDict[filenameExt]["Duration"] += 1
+                    #premier argument optionnel si il y a une valeur d'entré nous allons avoir le poids dans le dict, sinon rien
+                    if size:
+                        filenameDir = os.path.join(path, file)
+                        dirSize = os.path.getsize(filenameDir)
+                        fichierDict["Size"] = dirSize
+####################################################################################################################
+        else:
+            for file in files:
+                fichierDict = {}
+                #enlever le .ds_store
+                if file.startswith("."):
+                    continue
+                #fichier séparé par les points
+                fileSplit = file.split(".")
+                ext = fileSplit[-1]
+                filename = fileSplit[0]
+                filenameExt = filename+ext
+                #Si un argument est ecrit, le script va seulement lister les fichier avec les extension indiqué
+                if extension:
+                    if extension != ext:
+                        continue
+                if not filenameExt in myDict:
+                    fichierDict["name"] = filenameExt
                     fichierDict["extension"] = ext
                     fichierDict["path"] = path
-                continue
-            if len(fileSplit) == 3: #pour trouver si c'est une image séquence on rechercher les split de trois partie
-                if filename in file: #On veut seulement se qui est dans l'image séquence pas le reste
-                    imageDict.setdefault(filename, []).append(file) #On se crée un dict comprenent le nom de la sequence et tous les frames correspondant
-                    fichierDict["extension"] = ext
-                    fichierDict["path"] = path
-                    fichierDict["name"] = filename
-                    fichierDict["Duration"] = len(imageDict[filename]) #La durée de la séquence d'image
-            else:
-                fichierDict["name"] = filename
-                fichierDict["extension"] = ext
-                fichierDict["path"] = path
-        listeFichierDict.append(fichierDict)
-    return listeFichierDict
+                    fichierDict["Duration"] = 1
+                    myDict[filenameExt] = fichierDict
+                elif (ext == myDict[filenameExt]["extension"]) and len(fileSplit) == 3:
+                    myDict[filenameExt]["Duration"] += 1
+                #premier argument optionnel si il y a une valeur d'entré nous allons avoir le poids dans le dict, sinon rien
+                if size:
+                    filenameDir = os.path.join(path, file)
+                    dirSize = os.path.getsize(filenameDir)
+                    fichierDict["Size"] = dirSize
+#imageDict.setdefault(filename, []).append(file) 
+    return myDict.values()
 
-g = listingFolder()
-print g
+for file in listingFolder(nbMax = 1):
+    print file
