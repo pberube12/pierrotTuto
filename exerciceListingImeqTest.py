@@ -10,9 +10,8 @@
 
 import sys
 import os
-import pierrotsModules
 
-def listingFolder(size = False, nbMax = False, extension = False):
+def listingFolder(size = False, nbMax = 0, extension = False):
     """
     Scrip qui liste un folder et tous les sous folders, retourne une liste de dictionnaire des fichiers avec infos. 
     Ensuite il devra avoir des spécification au recherche, choisir qu'elle extension on veut chercher, la taille des fichier ou non
@@ -25,7 +24,6 @@ def listingFolder(size = False, nbMax = False, extension = False):
         fichierDict = Dictionnaire comprennant name, extension, size, path, pour chaque fichier 
         ext = extenssion
         filename = nom du fichier
-        filanameDir = Nom du fichier avec son path
     """
     dirSize = 0
     pathOriginal = os.walk("/Users/assistant/Desktop/Not_Delete")
@@ -44,24 +42,25 @@ def listingFolder(size = False, nbMax = False, extension = False):
             #enlever le .ds_store
             if file.startswith("."):
                 continue
-            #fichier séparé par les points
+            #fichier separe par les points
             fileSplit = file.split(".")
             ext = fileSplit[-1]
             filename = fileSplit[0]
-            filenameExt = filename+ext
-            #Si un argument est ecrit, le script va seulement lister les fichier avec les extension indiqué
+            filenameExt = filename+ext #besoin pour savoir si il existe dans le dict avec extension
+            #Si un argument est ecrit, le script va seulement lister les fichier avec les extension indique
             if extension:
                 if extension != ext:
                     continue
             if not filenameExt in myDict:
-                fichierDict["name"] = filenameExt
+                fichierDict["name"] = filename
                 fichierDict["extension"] = ext
                 fichierDict["path"] = path
-                fichierDict["Duration"] = 1
+                duration = 1
                 myDict[filenameExt] = fichierDict
             elif (ext == myDict[filenameExt]["extension"]) and len(fileSplit) == 3:
-                myDict[filenameExt]["Duration"] += 1
-            #premier argument optionnel si il y a une valeur d'entré nous allons avoir le poids dans le dict, sinon rien
+                duration += 1 #accrementation pour avoir la dur�e total de la sequence d'image
+                myDict[filenameExt]["Duration"] = duration
+            #premier argument optionnel si il y a une valeur d'entre nous allons avoir le poids dans le dict, sinon rien
             if size:
                 filenameDir = os.path.join(path, file)
                 dirSize = os.path.getsize(filenameDir)
