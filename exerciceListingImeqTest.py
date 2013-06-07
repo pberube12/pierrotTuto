@@ -32,8 +32,8 @@ def listingFolder(size = False, nbMax = 0, extension = False):
         #pour avoir une recursion differente dans mes qts
         if nbMax:
             pathSplit = path.split("/")[4:]
-            if len(pathSplit) <= nbMax:
-                files = os.listdir(path)
+            if len(pathSplit) > nbMax:
+                continue
         for file in files:
             fileNewListePath = os.path.join(path, file)
             if os.path.isdir(fileNewListePath):

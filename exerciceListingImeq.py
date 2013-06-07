@@ -98,5 +98,5 @@ def listingFolder(size = False, nbMax = False, extension = False):
 #imageDict.setdefault(filename, []).append(file) 
     return myDict.values()
 
-for file in listingFolder(nbMax = 1):
+for file in listingFolder(nbMax = 2):
     print file
